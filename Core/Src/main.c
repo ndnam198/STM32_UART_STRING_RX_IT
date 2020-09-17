@@ -168,9 +168,9 @@ int main(void)
       vUARTSend(huart3, (uint8_t *)"\r\n-");
       vUARTSend(huart3, (uint8_t *)buffer);
       vUARTSend(huart3, (uint8_t *)"-\r\n");
-      toggleLed2
+      toggleLed2;
 
-          Transfer_cplt = 0; //Reset lai bien tranfer_complete
+	  Transfer_cplt = 0; //Reset lai bien tranfer_complete
     }
 
     HAL_Delay(100);

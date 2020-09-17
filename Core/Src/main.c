@@ -22,8 +22,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
 #include "myLib.h"
 /* USER CODE END Includes */
 
@@ -51,7 +51,7 @@ uint8_t i, ucStringLength, Rx_indx;
 char ucTransmitCpltFlag, ucRxData[2], ucRxBuffer[100];
 char ucGeneralString[100];
 char Rx_data[2], Rx_Buffer[100], Transfer_cplt; //Khai bao cac bien de nhan du lieu
-char buffer[100]; //Khai bao mang buffer 100 phan tu
+char buffer[100];                               //Khai bao mang buffer 100 phan tu
 
 uint8_t ucRxIndex;
 /* USER CODE END PV */
@@ -133,8 +133,8 @@ int main(void)
 
   offAllLed;
   /* USER CODE BEGIN 2 */
-  HAL_UART_Receive_IT(&huart2, (uint8_t*)ucRxData, 2);
-  HAL_UART_Receive_IT(&huart3, (uint8_t*)ucRxData, 2);
+  HAL_UART_Receive_IT(&huart2, (uint8_t *)ucRxData, 2);
+  HAL_UART_Receive_IT(&huart3, (uint8_t *)ucRxData, 2);
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -143,12 +143,13 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  toggleLed4;
+    toggleLed4;
 
-	/**
+    /**
 	*
 	*/
-    if(ucTransmitCpltFlag){
+    if (ucTransmitCpltFlag)
+    {
       sprintf(ucGeneralString, "\r\nUART2 Received String:  \"%s\"\r\n", ucRxBuffer);
 
       vUARTSend(huart2, (uint8_t *)"\r\n*");
@@ -163,13 +164,13 @@ int main(void)
      */
     if (Transfer_cplt)
     {
-      sprintf(buffer, "\r\nUART3 Received String: \"%s\"\r\n", Rx_Buffer);	// IN bufer
+      sprintf(buffer, "\r\nUART3 Received String: \"%s\"\r\n", Rx_Buffer); // IN bufer
       vUARTSend(huart3, (uint8_t *)"\r\n-");
-      vUARTSend(huart3, (uint8_t*)buffer);
+      vUARTSend(huart3, (uint8_t *)buffer);
       vUARTSend(huart3, (uint8_t *)"-\r\n");
       toggleLed2
 
-      Transfer_cplt = 0; //Reset lai bien tranfer_complete
+          Transfer_cplt = 0; //Reset lai bien tranfer_complete
     }
 
     HAL_Delay(100);
@@ -202,8 +203,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB buses clocks
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -244,7 +244,6 @@ static void MX_USART2_UART_Init(void)
   }
   /* USER CODE BEGIN USART2_Init 2 */
   /* USER CODE END USART2_Init 2 */
-
 }
 
 /**
@@ -277,7 +276,6 @@ static void MX_USART3_UART_Init(void)
   /* USER CODE BEGIN USART3_Init 2 */
 
   /* USER CODE END USART3_Init 2 */
-
 }
 
 /**
@@ -295,32 +293,32 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11|GPIO_PIN_12, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11 | GPIO_PIN_12, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5|GPIO_PIN_8, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5 | GPIO_PIN_8, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : BT_UP_Pin BT_CENTER_Pin BT_DOWN_Pin */
-  GPIO_InitStruct.Pin = BT_UP_Pin|BT_CENTER_Pin|BT_DOWN_Pin;
+  GPIO_InitStruct.Pin = BT_UP_Pin | BT_CENTER_Pin | BT_DOWN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : BT_LEFT_Pin BT_RIGHT_Pin */
-  GPIO_InitStruct.Pin = BT_LEFT_Pin|BT_RIGHT_Pin;
+  GPIO_InitStruct.Pin = BT_LEFT_Pin | BT_RIGHT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PA11 PA12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
+  GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_12;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB5 PB8 */
-  GPIO_InitStruct.Pin = GPIO_PIN_5|GPIO_PIN_8;
+  GPIO_InitStruct.Pin = GPIO_PIN_5 | GPIO_PIN_8;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -335,7 +333,6 @@ static void MX_GPIO_Init(void)
 
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 3, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-
 }
 
 /* USER CODE BEGIN 4 */
@@ -344,49 +341,56 @@ static void MX_GPIO_Init(void)
  * 
  * @param huart 
  */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
   uint8_t i;
-  if(huart->Instance == USART2){
-		if(ucRxIndex == 0){
-		  for (i = 0; i < 100; i++)
-		  {
-			/* code */
-			ucRxBuffer[i] = 0;
-		  }
-		}
+  if (huart->Instance == USART2)
+  {
+    if (ucRxIndex == 0)
+    {
+      for (i = 0; i < 100; i++)
+      {
+        /* code */
+        ucRxBuffer[i] = 0;
+      }
+    }
 
-		if(ucRxData[0]!=13){
-			ucRxBuffer[ucRxIndex++] = ucRxData[0];
-		}
+    if (ucRxData[0] != 13)
+    {
+      ucRxBuffer[ucRxIndex++] = ucRxData[0];
+    }
 
-		else{
-			ucRxIndex = 0;
-			ucTransmitCpltFlag = 1;
-		}
+    else
+    {
+      ucRxIndex = 0;
+      ucTransmitCpltFlag = 1;
+    }
 
-		HAL_UART_Receive_IT(&huart2, (uint8_t*)ucRxData, 1);
-
+    HAL_UART_Receive_IT(&huart2, (uint8_t *)ucRxData, 1);
   }
 
-  if (huart->Instance == USART3)		//UART hien tai la uart3
-	{
-		if (Rx_indx==0)
-		{
-			for (i=0;i<100;i++) Rx_Buffer[i]=0;
-		}									//xoa Rx_Buffer truoc khi nhan du lieu
+  if (huart->Instance == USART3) //Check if UART3 receive data
+  {
+    if (Rx_indx == 0)
+    {
+        for (i = 0; i < 100; i++)
+        Rx_Buffer[i] = 0;
+    } //Clear Buffer when Rx_indx == 0
 
-		if (Rx_data[0]!=13)					//Neu du lieu nhan duoc khac voi 13 (13 la ma cua phim enter)
-		{
-			Rx_Buffer[Rx_indx++]=Rx_data[0];	//them du lieu vao Rx_Buffer
-		}
-		else								//Neu phim enter duoc an
-		{
-			Rx_indx=0;						//Dua index ve 0
-			Transfer_cplt=1;				//Qua trinh truyen hoan tat, du lieu da san sang de doc
-		}
+    if (Rx_data[0] != 13) //If Received byte != 13 (ENTER BUTTON ON KEYBOARD) by which means confirm sending string from keyboard is not yet made
+    {
+      Rx_Buffer[Rx_indx++] = Rx_data[0]; //Continuously receive byte by byte into Rx_Buffer
+    }
 
-		HAL_UART_Receive_IT(&huart3, (uint8_t*)Rx_data, 1);	//Kich hoat UART nhan du lieu ngat moi luc
-	}
+    else //ENTER BUTTON is pressed ==> User confirm to send a string 
+
+    {
+      Rx_indx = 0;       //Reset Rx_indx to start receiving another string
+      Transfer_cplt = 1; //Set Transfer_cplt to 1 to inform about receiving previous string succesful
+    }
+
+    HAL_UART_Receive_IT(&huart3, (uint8_t *)Rx_data, 1); //UART3 RECEIVE_IT need to re-trigger to continue working or else stop receiving
+  }
 }
 
 /**
@@ -408,7 +412,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

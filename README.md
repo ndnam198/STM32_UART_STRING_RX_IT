@@ -1,3 +1,3 @@
 # STM32_UART_STRING_RX_IT
 
-Project nhận dữ liệu từ bàn phím do người dùng nhập vào
+Receive a string of user from keyboard and reprint to confirm what has been received  

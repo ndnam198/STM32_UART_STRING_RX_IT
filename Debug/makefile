@@ -30,24 +30,24 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-User\ Input\ Processing.elf \
+[USART]Read_user_string.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-User\ Input\ Processing.list \
+[USART]Read_user_string.list \
 
 OBJCOPY_BIN += \
-User\ Input\ Processing.bin \
+[USART]Read_user_string.bin \
 
 
 # All Target
-all: User\ Input\ Processing.elf secondary-outputs
+all: [USART]Read_user_string.elf secondary-outputs
 
 # Tool invocations
-User\ Input\ Processing.elf: $(OBJS) $(USER_OBJS) D:\Document\Software\STM32CubeIDE_workspace\User\ Input\ Processing\STM32F103C8TX_FLASH.ld
-	arm-none-eabi-gcc -o "User Input Processing.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\Document\Software\STM32CubeIDE_workspace\User Input Processing\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="User Input Processing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+[USART]Read_user_string.elf: $(OBJS) $(USER_OBJS) D:\Document\Software\STM32CubeIDE_workspace\[USART]Read_user_string\STM32F103C8TX_FLASH.ld
+	arm-none-eabi-gcc -o "[USART]Read_user_string.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\Document\Software\STM32CubeIDE_workspace\[USART]Read_user_string\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="[USART]Read_user_string.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -56,13 +56,13 @@ default.size.stdout: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-User\ Input\ Processing.list: $(EXECUTABLES)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "User Input Processing.list"
+[USART]Read_user_string.list: $(EXECUTABLES)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "[USART]Read_user_string.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-User\ Input\ Processing.bin: $(EXECUTABLES)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "User Input Processing.bin"
+[USART]Read_user_string.bin: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "[USART]Read_user_string.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
